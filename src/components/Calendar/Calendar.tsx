@@ -1,14 +1,24 @@
 import React from 'react'
-import { DateTime } from 'luxon'
+
+import './style.scss'
+import { TextField } from '@mui/material'
+import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 export const Calendar = () => {
-  const day = DateTime.now().day
-  const month = DateTime.local().toLocaleString({ month: 'long' })
+  const [value, setValue] = React.useState<Date | null>(new Date())
+
   return (
-    <div>
-      <div>{'Today'}</div>
-      <div>{day}</div>
-      <div>{month}</div>
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <StaticDatePicker
+        displayStaticWrapperAs='desktop'
+        openTo='day'
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue)
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
   )
 }
