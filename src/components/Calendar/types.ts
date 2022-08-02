@@ -1,5 +1,5 @@
 export type CalendarType = {
+  day: number
   month: string
   year: number
-  day: number
 }
