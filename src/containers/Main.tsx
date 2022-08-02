@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { DateTime } from 'luxon'
+
 import { Calendar } from '../components/Calendar/Calendar'
 import { Today } from '../components/Today/Today'
+
 import './style.scss'
-import { DateTime } from 'luxon'
 
 export const Main = () => {
   const weekday = DateTime.now().weekday
