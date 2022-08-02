@@ -1,8 +1,8 @@
 import React from 'react'
 
+import { WEEKDAYS } from '../../constatnts/weekdays'
 import './style.scss'
 import { TodayTypes } from './types'
-import { WEEKDAYS } from '../../constatnts/weekdays'
 
 export const Today = ({ weekday, day, month }: TodayTypes) => {
   const currentWeekday = WEEKDAYS[weekday]
