@@ -1,0 +1,19 @@
+@import 'src/constatnts/colors.scss';
+
+.todayDate {
+  border: 1px solid $persianIndigo;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  width: 85%;
+
+  .dateItem {
+    padding: 5px;
+  }
+
+  .day {
+    font-size: 28px;
+  }
+}
