@@ -1,0 +1,5 @@
+{
+  "serverPort": 6000,
+  "dbURL": "mongodb+srv://VeronikaM:AiKlhYU7nuWl1lwl@weberpcluster.zazxn.mongodb.net/?retryWrites=true&w=majority",
+  "secretKey": "web-erp-secret-key"
+}
