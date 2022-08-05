@@ -1,7 +1,7 @@
 @import "../../constants/colors";
 
-.registrationContainer {
-  background-image: url('../../assets/images/Design_Offices_Stuttgart_Tower_Lobby_1_-e1578503211704.jpeg');
+.loginContainer {
+  background-image: url('../../assets/images/ModernWorking.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -27,5 +27,6 @@
     text-decoration: none;
     border-bottom: 1px dashed $teal;
     padding:0 10px 5px;
+    font-family: Lato;
   }
 }

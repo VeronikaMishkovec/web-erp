@@ -3,14 +3,19 @@ import React, { ChangeEvent, useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import { LABEL } from '../../constants/labels'
 import { LoginFormType } from '../../pages/RegistrationPage/types'
 import { CustomInput } from '../customComponents/CustomInput'
-
 import './style.scss'
 
-export const LoginFormComponent = ({ title }: LoginFormType) => {
+export const LoginFormComponent = ({
+  buttonLabel,
+  title,
+  linkLabel,
+  linkRoute,
+}: LoginFormType) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -50,7 +55,12 @@ export const LoginFormComponent = ({ title }: LoginFormType) => {
         type={showPassword ? 'text' : 'password'}
         rightIcon={PasswordIcon}
       />
-      <Button variant='contained'>{LABEL.SIGN_IN}</Button>
+      <Button variant='contained' className={'signinButton'}>
+        {buttonLabel}
+      </Button>
+      <Link to={linkRoute} className={'loginLink'}>
+        {linkLabel}
+      </Link>
     </div>
   )
 }

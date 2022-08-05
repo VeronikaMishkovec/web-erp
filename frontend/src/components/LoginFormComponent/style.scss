@@ -26,17 +26,19 @@
     }
 
     label {
-      top: -7px;
+      top: -9px;
+      font-family: Lato;
     }
   }
 
   .notEmptySignInput {
     margin-top: 20px;
     min-width: 250px;
+
     div input{
       height: 20px;
       padding: 10px 15px;
-
+      font-family: Lato;
     }
   }
 
@@ -44,5 +46,18 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+
+  .signinButton {
+    margin-top: 20px;
+    width: 100%;
+    background-color: $teal;
+    opacity: 1;
+    font-family: Lato;
+
+    &:hover {
+      background-color: $sherpaBlue;
+      box-shadow: 0px 1px 10px 2px $nordic;
+    }
   }
 }

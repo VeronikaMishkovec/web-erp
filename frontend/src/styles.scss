@@ -1,9 +1,14 @@
 body {
   margin: 0;
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
 
   div {
     opacity: 1;
     z-index: 3;
+    font-family: 'Lato', sans-serif;
+  }
+
+  label, div, span, p, input {
+    font-family: 'Lato', sans-serif !important;
   }
 }
