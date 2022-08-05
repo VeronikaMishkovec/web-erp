@@ -6,14 +6,14 @@ import { HEADERS } from '../../constants/headers'
 import { LABEL } from '../../constants/labels'
 import { ROUTES } from '../../constants/routes'
 
-export const RegistrationPage = () => {
+export const LoginPage = () => {
   return (
-    <div className={'registrationContainer'}>
+    <div className={'loginContainer'}>
       <LoginFormComponent
-        title={HEADERS.REGISTRATION}
-        buttonLabel={LABEL.SIGN_IN}
-        linkLabel={LABEL.LOGIN}
-        linkRoute={ROUTES.LOGIN}
+        title={HEADERS.LOGIN}
+        buttonLabel={LABEL.LOGIN}
+        linkLabel={LABEL.SIGN_IN}
+        linkRoute={ROUTES.REGISTRATION}
       />
     </div>
   )
