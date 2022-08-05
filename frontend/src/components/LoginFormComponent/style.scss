@@ -1,0 +1,48 @@
+@import "../../constants/colors";
+
+.formContainer {
+  border: 1px solid $stormGrey;
+  background-color: $white;
+  opacity: 0.9;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .formTitle {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .signinInput {
+    margin-top: 20px;
+    min-width: 250px;
+
+    div input{
+      height: 20px;
+      padding: 10px 15px;
+    }
+
+    label {
+      top: -7px;
+    }
+  }
+
+  .notEmptySignInput {
+    margin-top: 20px;
+    min-width: 250px;
+    div input{
+      height: 20px;
+      padding: 10px 15px;
+
+    }
+  }
+
+  .inputIcon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
