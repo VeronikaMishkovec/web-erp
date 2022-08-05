@@ -1,0 +1,23 @@
+@import "../../constants/colors";
+
+.registrationContainer {
+  background-image: url('../../assets/images/Design_Offices_Stuttgart_Tower_Lobby_1_-e1578503211704.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $white;
+    top: 0;
+    right: 0;
+    opacity: 0.55;
+  }
+}

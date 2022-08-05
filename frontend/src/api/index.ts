@@ -12,7 +12,7 @@ const request = (
   path: string,
   method: Method,
   data: object,
-  token: string | null = null,
+  token: string | number | boolean,
 ) =>
   axios.request({
     baseURL,
@@ -35,7 +35,7 @@ const api = async (
 ) => {
   try {
     // console.log(name, 'args', data);
-    const res = await request(path, method, data)
+    const res = await request(path, method, data, '')
     console.log(name || '', res.data)
     return res.data
   } catch (error) {
