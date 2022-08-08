@@ -1,14 +1,21 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import './style.scss'
+import { useNavigate } from 'react-router-dom'
+
 import { LoginFormComponent } from '../../components/LoginFormComponent'
 import { HEADERS } from '../../constants/headers'
 import { LABEL } from '../../constants/labels'
 import { ROUTES } from '../../constants/routes'
+import { loginRequestAction } from '../../store/reducer/auth'
+import { useAppDispatch } from '../../store/reduxHooks'
+import './style.scss'
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const handleChangeEmail = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -16,6 +23,10 @@ export const LoginPage = () => {
   const handleChangePassword = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setPassword(e.target.value)
+
+  const handleLogin = () => {
+    return dispatch(loginRequestAction({ email, password }))
+  }
 
   return (
     <div className={'loginContainer'}>
@@ -28,7 +39,7 @@ export const LoginPage = () => {
         password={password}
         onChangePassword={handleChangePassword}
         onChangeEmail={handleChangeEmail}
-        onClickAuth={() => console.log('qwer')}
+        onClickAuth={handleLogin}
       />
     </div>
   )

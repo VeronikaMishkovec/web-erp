@@ -5,6 +5,7 @@ const Router = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
+const authMiddleware = require("../middleware/auth.middleware");
 const User = require("../models/User");
 const router = new Router();
 
@@ -51,18 +52,9 @@ router.post(
   }
 );
 
-router.post("/login", async (req, res) => {
+router.post("/login", authMiddleware, async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(404).json({ message: "User was not found" });
-    }
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
-
-    if (!isPasswordValid) {
-      res.status(400).json({ message: "Invalid password" });
-    }
+    const user = await User.findOne({ id: req.user.id });
     const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
       expiresIn: "1h",
     });

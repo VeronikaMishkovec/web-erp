@@ -3,10 +3,14 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 import { AuthType } from '../types/AuthType'
 
-import { AuthPayloadType } from './types/AuthPayloadType'
+import {
+  LoginPayloadType,
+  RegistrationPayloadType,
+} from './types/AuthPayloadType'
 
 const initialState: AuthType = {
   userId: '',
+  token: '',
 }
 
 export const authSlice = createSlice({
@@ -17,14 +21,25 @@ export const authSlice = createSlice({
     registrationRequestAction: (state, action) => {},
     registrationSuccessAction: (
       state,
-      action: PayloadAction<AuthPayloadType>,
+      action: PayloadAction<RegistrationPayloadType>,
     ) => {
       state.userId = action.payload.data.id
+    },
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+    loginRequestAction: (state, action) => {},
+    loginSuccessAction: (state, action: PayloadAction<LoginPayloadType>) => {
+      state.userId = action.payload.data.id
+      state.token = action.payload.data.token
     },
   },
 })
 
-export const { registrationRequestAction, registrationSuccessAction } =
-  authSlice.actions
+export const {
+  registrationRequestAction,
+  registrationSuccessAction,
+  loginRequestAction,
+  loginSuccessAction,
+} = authSlice.actions
 
 export default authSlice.reducer
