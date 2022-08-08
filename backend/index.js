@@ -1,25 +1,22 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const config = require('config')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const config = require("config");
+const express = require("express");
+const mongoose = require("mongoose");
 
-const authRouter = require('./routes/auth.routes')
+const authRouter = require("./routes/auth.routes");
 
-const app = express()
-const PORT = config.get('serverPort')
+const app = express();
+const PORT = config.get("serverPort");
 
-
-app.use(express.json())
-app.use('/api/auth', authRouter)
+app.use(express.json());
+app.use("/auth", authRouter);
 
 const start = async () => {
   try {
+    app.listen(PORT, () => console.log("Server started on port ", PORT));
+    await mongoose.connect(config.get("dbURL"));
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
+};
 
-    app.listen(PORT, () => console.log('Server started on port ', PORT))
-    await mongoose.connect(config.get('dbURL'))
-
-  } catch (e) {
-
-  }
-}
-
-start()
+start();
