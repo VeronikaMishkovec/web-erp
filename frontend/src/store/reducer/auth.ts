@@ -20,7 +20,7 @@ export const authSlice = createSlice({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     registrationRequestAction: (state, action) => {},
     registrationSuccessAction: (state, action: PayloadAction<any>) => {
-      state.userId = action.payload.userId
+      // state.userId = action.payload.userId
     },
   },
 })
