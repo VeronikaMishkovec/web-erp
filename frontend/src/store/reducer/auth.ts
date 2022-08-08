@@ -1,33 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-// Define a type for the slice state
-interface AuthState {
-  isLogin: boolean
-  userId: number
-}
+import { AuthType } from '../types/AuthType'
 
-// Define the initial state using that type
-const initialState: AuthState = {
-  isLogin: false,
-  userId: 0,
+import { AuthPayloadType } from './types/AuthPayloadType'
+
+const initialState: AuthType = {
+  userId: '',
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
     registrationRequestAction: (state, action) => {},
-    registrationSuccessAction: (state, action: PayloadAction<any>) => {
-      // state.userId = action.payload.userId
+    registrationSuccessAction: (
+      state,
+      action: PayloadAction<AuthPayloadType>,
+    ) => {
+      state.userId = action.payload.data.id
     },
   },
 })
 
 export const { registrationRequestAction, registrationSuccessAction } =
   authSlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
 
 export default authSlice.reducer

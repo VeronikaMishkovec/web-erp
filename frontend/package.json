@@ -15,7 +15,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "axios": "^0.27.2",
+    "axios": "0.26.0",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-no-inline-styles": "^1.0.5",
