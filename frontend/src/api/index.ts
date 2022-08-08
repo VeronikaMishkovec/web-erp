@@ -5,7 +5,7 @@ export const METHOD_POST = 'post'
 export const METHOD_PUT = 'put'
 export const METHOD_DELETE = 'delete'
 
-export const baseURL = 'http://localhost:6000'
+export const baseURL = 'http://localhost:6001'
 // export const baseURL = 'http://192.168.1.235:6000'
 
 const request = (
@@ -21,6 +21,7 @@ const request = (
     responseType: 'json',
     url: path,
     headers: {
+      'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*',
       //   authorization: token,
     },

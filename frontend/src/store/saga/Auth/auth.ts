@@ -3,13 +3,13 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import { registrationRequest } from '../../../api/requests/auth'
 import { RequsetParams } from '../../../api/requests/types'
 import * as action from '../../reducer/auth'
+import { AuthPayloadType } from '../../reducer/types/AuthPayloadType'
 
-// type PayloadType = Pick<RequsetParams, 'email' | 'password'>
+type PayloadType = { payload: Pick<RequsetParams, 'email' | 'password'> }
 
-function* registrationSagaWorker({ payload }: any) {
-  console.log(payload)
+function* registrationSagaWorker({ payload }: PayloadType) {
   try {
-    const res: ResponseType = yield call(registrationRequest, payload)
+    const res: AuthPayloadType = yield call(registrationRequest, payload)
     yield put(action.registrationSuccessAction(res))
   } catch (error) {
     console.log(error)
@@ -17,5 +17,6 @@ function* registrationSagaWorker({ payload }: any) {
 }
 
 export default function* registrationSagaWatcher() {
+  // @ts-ignore
   yield takeLatest(action.registrationRequestAction, registrationSagaWorker)
 }

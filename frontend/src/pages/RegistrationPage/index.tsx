@@ -1,12 +1,14 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { LoginFormComponent } from '../../components/LoginFormComponent'
 import { HEADERS } from '../../constants/headers'
 import { LABEL } from '../../constants/labels'
 import { ROUTES } from '../../constants/routes'
 import { registrationRequestAction } from '../../store/reducer/auth'
+import { MainType } from '../../store/types'
 
 import './style.scss'
 
@@ -15,6 +17,9 @@ export const RegistrationPage = () => {
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
+  const userId = useSelector((state: MainType) => state.auth.userId)
+
+  const navigate = useNavigate()
 
   const handleChangeEmail = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -24,6 +29,10 @@ export const RegistrationPage = () => {
   ) => setPassword(e.target.value)
   const handleSignin = () =>
     dispatch(registrationRequestAction({ email, password }))
+
+  useEffect(() => {
+    !!userId && navigate(ROUTES.LOGIN)
+  }, [userId])
 
   return (
     <div className={'registrationContainer'}>
