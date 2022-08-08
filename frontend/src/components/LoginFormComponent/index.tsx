@@ -6,8 +6,10 @@ import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import { LABEL } from '../../constants/labels'
-import { LoginFormType } from '../../pages/RegistrationPage/types'
 import { CustomInput } from '../customComponents/CustomInput'
+
+import { LoginFormType } from './types'
+
 import './style.scss'
 
 export const LoginFormComponent = ({
@@ -15,21 +17,18 @@ export const LoginFormComponent = ({
   title,
   linkLabel,
   linkRoute,
+  email,
+  password,
+  onChangeEmail,
+  onChangePassword,
+  onClickAuth,
 }: LoginFormType) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   const IS_EMPTY_EMAIL = email === '' ? 'signinInput' : 'notEmptySignInput'
   const IS_EMPTY_PASSWORD =
     password === '' ? 'signinInput' : 'notEmptySignInput'
 
-  const handleChangeEmail = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => setEmail(e.target.value)
-  const handleChangePassword = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => setPassword(e.target.value)
   const handleShowPassword = () => setShowPassword(!showPassword)
 
   const PasswordIcon = (
@@ -44,18 +43,22 @@ export const LoginFormComponent = ({
       <CustomInput
         className={IS_EMPTY_EMAIL}
         label={LABEL.EMAIL}
-        onChange={handleChangeEmail}
+        onChange={onChangeEmail}
         value={email}
       />
       <CustomInput
         className={IS_EMPTY_PASSWORD}
         label={LABEL.PASSWORD}
-        onChange={handleChangePassword}
+        onChange={onChangePassword}
         value={password}
         type={showPassword ? 'text' : 'password'}
         rightIcon={PasswordIcon}
       />
-      <Button variant='contained' className={'signinButton'}>
+      <Button
+        variant='contained'
+        className={'signinButton'}
+        onClick={onClickAuth}
+      >
         {buttonLabel}
       </Button>
       <Link to={linkRoute} className={'loginLink'}>

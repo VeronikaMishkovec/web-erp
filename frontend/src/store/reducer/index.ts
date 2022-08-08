@@ -3,4 +3,4 @@ import { combineReducers } from 'redux'
 import { authSlice } from './auth'
 
 // @ts-ignore
-export const rootReducer = combineReducers({ auth: authSlice })
+export const rootReducer = { auth: authSlice.reducer }
