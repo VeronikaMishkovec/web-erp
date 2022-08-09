@@ -4,3 +4,7 @@ import { API } from '../../constants/api'
 
 export const registrationRequest = ({ email, password }: RequsetParams) =>
   api(API.SIGN_IN, METHOD_POST, { email, password }, 'registration')
+
+export const loginRequest = ({ email, password }: RequsetParams) => {
+  return api(API.LOGIN, METHOD_POST, { email, password }, 'login')
+}

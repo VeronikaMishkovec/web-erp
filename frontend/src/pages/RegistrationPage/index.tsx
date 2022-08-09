@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { LoginFormComponent } from '../../components/LoginFormComponent'
@@ -8,6 +7,7 @@ import { HEADERS } from '../../constants/headers'
 import { LABEL } from '../../constants/labels'
 import { ROUTES } from '../../constants/routes'
 import { registrationRequestAction } from '../../store/reducer/auth'
+import { useAppDispatch, useAppSelector } from '../../store/reduxHooks'
 import { MainType } from '../../store/types'
 
 import './style.scss'
@@ -16,8 +16,8 @@ export const RegistrationPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const dispatch = useDispatch()
-  const userId = useSelector((state: MainType) => state.auth.userId)
+  const dispatch = useAppDispatch()
+  const userId = useAppSelector((state: MainType) => state.auth.userId)
 
   const navigate = useNavigate()
 
@@ -40,7 +40,7 @@ export const RegistrationPage = () => {
         title={HEADERS.REGISTRATION}
         buttonLabel={LABEL.SIGN_IN}
         linkLabel={LABEL.LOGIN}
-        linkRoute={ROUTES.LOGIN}
+        linkRoute={ROUTES.REGISTRATION}
         email={email}
         password={password}
         onChangeEmail={handleChangeEmail}
