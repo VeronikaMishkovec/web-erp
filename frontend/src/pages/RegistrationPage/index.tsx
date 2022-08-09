@@ -17,7 +17,7 @@ export const RegistrationPage = () => {
   const [password, setPassword] = useState('')
 
   const dispatch = useAppDispatch()
-  const userId = useAppSelector((state: MainType) => state.auth.userId)
+  const userId = useAppSelector((state: MainType) => state.auth.user.id)
 
   const navigate = useNavigate()
 

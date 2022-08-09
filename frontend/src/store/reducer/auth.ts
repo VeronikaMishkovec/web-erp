@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { AuthType } from '../types/AuthType'
+import { AuthResponse } from '../../types/AuthResponse'
 
-import {
-  LoginPayloadType,
-  RegistrationPayloadType,
-} from './types/AuthPayloadType'
-
-const initialState: AuthType = {
-  userId: '',
-  token: '',
+const initialState: AuthResponse = {
+  accessToken: '',
+  refreshToken: '',
+  user: {
+    id: '',
+    email: '',
+  },
 }
 
 export const authSlice = createSlice({
@@ -19,18 +18,19 @@ export const authSlice = createSlice({
   reducers: {
     // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
     registrationRequestAction: (state, action) => {},
-    registrationSuccessAction: (
-      state,
-      action: PayloadAction<RegistrationPayloadType>,
-    ) => {
-      state.userId = action.payload.data.id
+    registrationSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
+      state.user = action.payload.user
     },
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
     loginRequestAction: (state, action) => {},
-    loginSuccessAction: (state, action: PayloadAction<LoginPayloadType>) => {
-      state.userId = action.payload.data.id
-      state.token = action.payload.data.token
+    loginSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
+      state.user = action.payload.user
+    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    checkAuthRequestAction: (state, action) => {},
+    checkAuthSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
+      state.refreshToken = action.payload.refreshToken
     },
   },
 })
@@ -40,6 +40,8 @@ export const {
   registrationSuccessAction,
   loginRequestAction,
   loginSuccessAction,
+  checkAuthRequestAction,
+  checkAuthSuccessAction,
 } = authSlice.actions
 
 export default authSlice.reducer

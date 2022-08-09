@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Router = require("express").Router;
 const { body } = require("express-validator");
 
