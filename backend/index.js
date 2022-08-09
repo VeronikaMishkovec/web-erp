@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 
+const errorMiddleware = require("./middlewares/errorMiddleware");
 const router = require("./routes/index");
 
 const app = express();
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use("/auth", router);
+
+app.use(errorMiddleware);
 
 const start = async () => {
   try {
