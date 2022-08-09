@@ -1,5 +1,5 @@
-import { AuthType } from './AuthType'
+import { IUser } from '../../types/IUser'
 
 export type MainType = {
-  auth: AuthType
+  auth: { user: IUser }
 }

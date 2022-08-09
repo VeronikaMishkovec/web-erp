@@ -1,10 +1,16 @@
 import api, { METHOD_POST } from '../../api/index'
-import { RequsetParams } from '../../api/requests/types'
 import { API } from '../../constants/api'
 
-export const registrationRequest = ({ email, password }: RequsetParams) =>
-  api(API.SIGN_IN, METHOD_POST, { email, password }, 'registration')
+import { CheckAuthRequestType, RequestParams } from './types'
 
-export const loginRequest = ({ email, password }: RequsetParams) => {
+export const registrationRequest = ({ email, password }: RequestParams) => {
+  return api(API.SIGN_IN, METHOD_POST, { email, password }, 'registration')
+}
+
+export const loginRequest = ({ email, password }: RequestParams) => {
   return api(API.LOGIN, METHOD_POST, { email, password }, 'login')
+}
+
+export const checkAuthRequest = ({ token }: CheckAuthRequestType) => {
+  return api(API.REFRESH, METHOD_POST, { token }, 'refresh')
 }

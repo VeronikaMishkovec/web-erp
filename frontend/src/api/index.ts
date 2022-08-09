@@ -5,14 +5,14 @@ export const METHOD_POST = 'post'
 export const METHOD_PUT = 'put'
 export const METHOD_DELETE = 'delete'
 
-export const baseURL = 'http://localhost:6001'
+export const baseURL = 'http://localhost:5001'
 // export const baseURL = 'http://192.168.1.235:6000'
 
 const request = (
   path: string,
   method: Method,
   data: object,
-  // token: string | number | boolean,
+  token: string | number | boolean,
 ) =>
   axios.request({
     baseURL,
@@ -23,7 +23,7 @@ const request = (
     headers: {
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*',
-      //   authorization: token,
+      authorization: token,
     },
     withCredentials: true,
   })
