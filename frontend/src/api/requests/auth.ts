@@ -1,4 +1,4 @@
-import api, { METHOD_POST } from '../../api/index'
+import api, { METHOD_GET, METHOD_POST } from '../../api/index'
 import { API } from '../../constants/api'
 
 import { CheckAuthRequestType, RequestParams } from './types'
@@ -12,5 +12,5 @@ export const loginRequest = ({ email, password }: RequestParams) => {
 }
 
 export const checkAuthRequest = ({ token }: CheckAuthRequestType) => {
-  return api(API.REFRESH, METHOD_POST, { token }, 'refresh')
+  return api(API.REFRESH, METHOD_GET, { token }, 'refresh')
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const bcrypt = require("bcrypt");
 
 const UserDto = require("../dtos/userDto");
@@ -76,6 +77,12 @@ class UserService {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async getUserInfo(id) {
+    const user = await UserModel.findOne({ id });
+    const userDto = new UserDto(user);
+    return { user: userDto };
   }
 }
 module.exports = new UserService();

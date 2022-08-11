@@ -31,6 +31,7 @@ export const authSlice = createSlice({
     checkAuthRequestAction: (state, action) => {},
     checkAuthSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
       state.refreshToken = action.payload.refreshToken
+      state.user = action.payload.user
     },
   },
 })

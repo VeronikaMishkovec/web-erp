@@ -14,6 +14,6 @@ router.post(
   userController.registration
 );
 router.post("/login", userController.login);
-router.post("/refresh", userController.refresh);
+router.get("/refresh", userController.refresh);
 
 module.exports = router;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { validationResult } = require("express-validator");
 
 const ApiError = require("../exeptions/apiError");
@@ -47,6 +48,18 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
+
+      return res.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async userInfo(req, res, next) {
+    try {
+      const { id } = req.body;
+
+      const userData = await userService.getUserInfo(id);
 
       return res.json(userData);
     } catch (e) {
