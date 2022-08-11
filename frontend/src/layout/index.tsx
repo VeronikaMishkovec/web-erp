@@ -1,10 +1,12 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
+import { Link } from 'react-router-dom'
 
 import { COLORS } from '../constants/colors'
+import { ROUTES } from '../constants/routes'
 import { checkAuthRequestAction } from '../store/reducer/auth'
 import { userInfoRequestAction } from '../store/reducer/user'
 import { useAppDispatch, useAppSelector } from '../store/reduxHooks'
@@ -38,7 +40,9 @@ export const Layout = ({ children }: Props) => {
     <div>
       <header className={'headerContainer'}>
         <div className={'userContainer'}>
-          <AccountCircleIcon sx={{ color: COLORS.TEAL }} />
+          <Link to={ROUTES.PROFILE} className={'profileLink'}>
+            <AccountCircleIcon sx={{ color: COLORS.TEAL }} />
+          </Link>
           <div className={'userEmail'}>{userEmail}</div>
         </div>
         <div className={'currentProjectContainer'}>
