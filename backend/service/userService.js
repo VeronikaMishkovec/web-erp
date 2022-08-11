@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 
 const UserDto = require("../dtos/userDto");
+const UserInfoDto = require("../dtos/userInfoDto");
 const ApiError = require("../exeptions/apiError");
 const UserModel = require("../models/userModel");
 const tokenService = require("../service/tokenService");
@@ -14,7 +15,12 @@ class UserService {
       throw ApiError.BadRequest(`Email ${email} has already been registrated`);
     }
     const hashPassword = await bcrypt.hash(password, 3);
-    const user = await UserModel.create({ email, password: hashPassword });
+    const user = await UserModel.create({
+      email,
+      password: hashPassword,
+      is_current_project: false,
+      project_list: [],
+    });
 
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
@@ -81,7 +87,7 @@ class UserService {
 
   async getUserInfo(id) {
     const user = await UserModel.findOne({ id });
-    const userDto = new UserDto(user);
+    const userDto = new UserInfoDto(user);
     return { user: userDto };
   }
 }
