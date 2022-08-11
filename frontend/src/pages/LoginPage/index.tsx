@@ -16,6 +16,7 @@ export const LoginPage = () => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const token = localStorage.getItem('refreshToken')
 
   const handleChangeEmail = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -27,6 +28,10 @@ export const LoginPage = () => {
   const handleLogin = () => {
     return dispatch(loginRequestAction({ email, password }))
   }
+
+  useEffect(() => {
+    !!token && navigate(ROUTES.MAIN)
+  }, [token])
 
   return (
     <div className={'loginContainer'}>

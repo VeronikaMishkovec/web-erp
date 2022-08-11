@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { UserResponse } from '../../types/AuthResponse'
 
 const initialState: UserResponse = {
-  user: { email: '', id: '' },
+  user: { email: '', id: '', project_list: [], is_current_project: false },
 }
 
 export const userSlice = createSlice({
@@ -15,6 +15,8 @@ export const userSlice = createSlice({
     userInfoRequestAction: (state, action) => {},
     userInfoSuccessAction: (state, action: PayloadAction<UserResponse>) => {
       state.user.email = action.payload.user.email
+      state.user.is_current_project = action.payload.user.is_current_project
+      state.user.project_list = action.payload.user.project_list
     },
   },
 })

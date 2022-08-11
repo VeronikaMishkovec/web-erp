@@ -9,6 +9,8 @@ const initialState: AuthResponse = {
   user: {
     id: '',
     email: '',
+    project_list: [],
+    is_current_project: false,
   },
 }
 

@@ -1,11 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { COLORS } from '../constants/colors'
-import { ROUTES } from '../constants/routes'
 import { checkAuthRequestAction } from '../store/reducer/auth'
 import { userInfoRequestAction } from '../store/reducer/user'
 import { useAppDispatch, useAppSelector } from '../store/reduxHooks'
@@ -21,18 +20,11 @@ export const Layout = ({ children }: Props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  // const userEmail = useAppSelector((state: MainType) => state.user.user.email)
-
-  const init = () => {
-    try {
-      const token = localStorage.getItem('refreshToken')
-      console.log(token)
-      dispatch(checkAuthRequestAction({ token }))
-      return true
-    } catch (e) {
-      return false
-    }
-  }
+  const userId = useAppSelector((state: MainType) => state.auth.user.id)
+  const userEmail = useAppSelector((state: MainType) => state.user.user.email)
+  const isCurrentProject = useAppSelector(
+    (state: MainType) => state.user.user.is_current_project,
+  )
 
   useEffect(() => {
     const token = localStorage.getItem('refreshToken')
@@ -40,16 +32,8 @@ export const Layout = ({ children }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (!init()) {
-      navigate(ROUTES.LOGIN)
-    }
-  }, [])
-
-  const userId = useAppSelector((state: MainType) => state)
-
-  useEffect(() => {
-    console.log('@@@', userId)
-    // dispatch(userInfoRequestAction({ userId }))
+    dispatch(userInfoRequestAction({ userId }))
+    // !userId && navigate(ROUTES.LOGIN)
   }, [userId])
 
   return (
@@ -57,7 +41,19 @@ export const Layout = ({ children }: Props) => {
       <header className={'headerContainer'}>
         <div className={'userContainer'}>
           <AccountCircleIcon sx={{ color: COLORS.TEAL }} />
-          {/* <div className={'userEmail'}>{userEmail}</div> */}
+          <div className={'userEmail'}>{userEmail}</div>
+        </div>
+        <div className={'currentProjectContainer'}>
+          {isCurrentProject ? (
+            ''
+          ) : (
+            <>
+              <AccessTimeIcon sx={{ color: COLORS.TEAL }} />
+              <div className={'currentProject'}>
+                {'Waiting for a project...'}
+              </div>
+            </>
+          )}
         </div>
       </header>
       {children}

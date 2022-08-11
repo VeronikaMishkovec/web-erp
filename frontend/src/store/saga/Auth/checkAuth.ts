@@ -9,6 +9,7 @@ function* checkAuthSagaWorker({ token }: CheckAuthRequestType) {
   try {
     const res: AuthResponse = yield call(checkAuthRequest, { token })
     yield put(action.checkAuthSuccessAction(res))
+    console.log(res)
     localStorage.setItem('refreshToken', res.refreshToken)
   } catch (error) {
     console.log(error)
