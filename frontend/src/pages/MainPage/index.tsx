@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { TextField } from '@mui/material'
+import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTime } from 'luxon'
 
 import { TodayDate } from '../../components/TodayDate'
@@ -9,6 +12,8 @@ import { Layout } from '../../layout'
 import './styles.scss'
 
 export const MainPage = () => {
+  const [value, setValue] = React.useState<Date | null>(new Date())
+
   const today = DateTime.now().day
   const weekday = WEEKDAYS[DateTime.now().weekday]
   const month = DateTime.now().toFormat('MMMM')
@@ -17,6 +22,18 @@ export const MainPage = () => {
     <Layout>
       <div className={'mainContainer'}>
         <TodayDate day={today} weekday={weekday} month={month} />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            className={'calendar'}
+            displayStaticWrapperAs='desktop'
+            openTo='day'
+            value={value}
+            onChange={(newValue) => {
+              setValue(newValue)
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
       </div>
     </Layout>
   )
