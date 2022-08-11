@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react'
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { useNavigate } from 'react-router-dom'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 import { COLORS } from '../constants/colors'
 import { checkAuthRequestAction } from '../store/reducer/auth'
@@ -18,7 +18,6 @@ interface Props {
 
 export const Layout = ({ children }: Props) => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const userId = useAppSelector((state: MainType) => state.auth.user.id)
   const userEmail = useAppSelector((state: MainType) => state.user.user.email)
@@ -33,7 +32,6 @@ export const Layout = ({ children }: Props) => {
 
   useEffect(() => {
     dispatch(userInfoRequestAction({ userId }))
-    // !userId && navigate(ROUTES.LOGIN)
   }, [userId])
 
   return (
@@ -54,6 +52,9 @@ export const Layout = ({ children }: Props) => {
               </div>
             </>
           )}
+        </div>
+        <div className={'iconsContainer'}>
+          <SettingsIcon sx={{ color: COLORS.TEAL }} />
         </div>
       </header>
       {children}
