@@ -6,3 +6,7 @@ export type RequestParams = {
 export interface CheckAuthRequestType {
   token: string
 }
+
+export interface UserInfoRequestType {
+  id: string
+}

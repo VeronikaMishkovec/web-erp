@@ -6,7 +6,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const errorMiddleware = require("./middlewares/errorMiddleware");
-const router = require("./routes/index");
+const authRouter = require("./routes/AuthRouter");
+const userRouter = require("./routes/UserRouter");
 
 const app = express();
 
@@ -20,7 +21,9 @@ app.use(
     origin: process.env.CLIENT_URL,
   })
 );
-app.use("/auth", router);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
+
 app.use(errorMiddleware);
 
 const start = async () => {

@@ -6,3 +6,7 @@ export interface AuthResponse {
 
   user: IUser
 }
+
+export interface UserResponse {
+  user: IUser
+}
