@@ -1,0 +1,20 @@
+@import "../../constants/colors";
+
+.todayDateContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $teal;
+  max-width: 250px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 10px;
+
+  .weekday, .day, .month {
+    color: $nordic;
+  }
+
+  .day {
+    font-size: 40px;
+  }
+}
