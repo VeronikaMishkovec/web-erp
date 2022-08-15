@@ -4,5 +4,6 @@ export const WEEKDAYS = [
   'Tuesday',
   'Wednesday',
   'Thursday',
+  'Friday',
   'Saturday',
 ]

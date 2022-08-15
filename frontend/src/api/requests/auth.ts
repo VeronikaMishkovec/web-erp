@@ -14,3 +14,7 @@ export const loginRequest = ({ email, password }: RequestParams) => {
 export const checkAuthRequest = ({ token }: CheckAuthRequestType) => {
   return api(API.REFRESH, METHOD_GET, { token }, 'refresh')
 }
+
+export const logoutRequest = ({ token }: CheckAuthRequestType) => {
+  return api(API.LOGOUT, METHOD_POST, { token }, 'logout')
+}

@@ -1,6 +1,14 @@
+@import "../../constants/colors";
+
 .mainContainer {
   padding: 10px 30px;
+  display: flex;
+
+  .Mui-selected {
+    background-color: $teal !important;
+  }
 }
 .MuiPickerStaticWrapper-root {
    max-width: 320px;
  }
+

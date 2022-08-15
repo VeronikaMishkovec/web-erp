@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { AuthResponse } from '../../types/AuthResponse'
 
 const initialState: AuthResponse = {
+  isLogin: false,
   accessToken: '',
   refreshToken: '',
   user: {
@@ -28,12 +29,20 @@ export const authSlice = createSlice({
     loginRequestAction: (state, action) => {},
     loginSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
       state.user = action.payload.user
+      state.isLogin = true
     },
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     checkAuthRequestAction: (state, action) => {},
     checkAuthSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
       state.refreshToken = action.payload.refreshToken
       state.user = action.payload.user
+      state.isLogin = true
+    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    logoutRequestAction: (state, action) => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    logoutSuccessAction: (state, action: PayloadAction<AuthResponse>) => {
+      state.isLogin = false
     },
   },
 })
@@ -45,6 +54,8 @@ export const {
   loginSuccessAction,
   checkAuthRequestAction,
   checkAuthSuccessAction,
+  logoutRequestAction,
+  logoutSuccessAction,
 } = authSlice.actions
 
 export default authSlice.reducer

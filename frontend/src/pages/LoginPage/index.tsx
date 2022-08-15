@@ -29,10 +29,6 @@ export const LoginPage = () => {
     return dispatch(loginRequestAction({ email, password }))
   }
 
-  useEffect(() => {
-    !!token && navigate(ROUTES.MAIN)
-  }, [token])
-
   return (
     <div className={'loginContainer'}>
       <LoginFormComponent

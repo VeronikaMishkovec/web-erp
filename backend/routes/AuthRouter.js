@@ -15,5 +15,6 @@ router.post(
 );
 router.post("/login", userController.login);
 router.get("/refresh", userController.refresh);
+router.post("/logout", userController.logout);
 
 module.exports = router;

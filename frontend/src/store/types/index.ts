@@ -1,6 +1,6 @@
 import { IUser } from '../../types/IUser'
 
 export type MainType = {
-  auth: { user: IUser }
+  auth: { isLogin: boolean; refreshToken: string; user: IUser }
   user: { user: IUser }
 }

@@ -11,6 +11,7 @@ function* loginSagaWorker({ payload }: PayloadType) {
   try {
     const res: AuthResponse = yield call(loginRequest, payload)
     yield put(action.loginSuccessAction(res))
+    localStorage.setItem('refreshToken', res.refreshToken)
   } catch (error) {
     console.log(error)
   }

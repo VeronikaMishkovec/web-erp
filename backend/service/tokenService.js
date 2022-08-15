@@ -1,5 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const jwt = require("jsonwebtoken");
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const tokenModel = require("../models/tokenModel");
 
 class TokenService {
@@ -51,6 +53,11 @@ class TokenService {
   async findToken(refreshToken) {
     const tokenData = await tokenModel.findOne({ refreshToken });
 
+    return tokenData;
+  }
+
+  async removeToken(refreshToken) {
+    const tokenData = await tokenModel.deleteOne({ refreshToken });
     return tokenData;
   }
 }
