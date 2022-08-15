@@ -3,8 +3,9 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { AddNewProjectModal } from '../components/Modals/AddNewProjectModal'
 import { SettingsMenu } from '../components/SettingsMenu'
 import { COLORS } from '../constants/colors'
 import { ROUTES } from '../constants/routes'
@@ -24,6 +25,7 @@ interface Props {
 
 export const Layout = ({ children }: Props) => {
   const [showSettings, setShowSettings] = useState(false)
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -83,7 +85,20 @@ export const Layout = ({ children }: Props) => {
         </div>
       </header>
       {children}
-      {showSettings && <SettingsMenu onLogoutClick={handleLogout} />}
+      {showSettings && (
+        <SettingsMenu
+          onLogoutClick={handleLogout}
+          onAddNewClick={() => {
+            setShowNewProjectModal(true)
+            setShowSettings(false)
+          }}
+        />
+      )}
+      <AddNewProjectModal
+        open={showNewProjectModal}
+        onCloseModal={() => setShowSettings(false)}
+        onClickCancel={() => setShowNewProjectModal(false)}
+      />
     </div>
   )
 }

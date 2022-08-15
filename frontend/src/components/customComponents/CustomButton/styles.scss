@@ -1,0 +1,30 @@
+@import '../../../constants/colors';
+
+.buttonContainer{
+  .submitButton {
+    margin-top: 20px;
+    background-color: $teal;
+    opacity: 1;
+    font-family: Lato;
+
+    &:hover {
+      background-color: $sherpaBlue;
+      box-shadow: 0px 1px 10px 2px $nordic;
+    }
+  }
+
+  .cancelButton {
+    margin-top: 20px;
+    background-color: $onahau;
+    opacity: 1;
+    font-family: Lato;
+    margin-right: 10px;
+    color: $teal;
+
+    &:hover {
+      background-color: $onahau;
+      box-shadow: 0px 1px 10px 2px $onahau;
+    }
+  }
+}
+

@@ -1,0 +1,29 @@
+@import '../../../constants/colors';
+
+.emptyInput {
+  margin-top: 5px !important;
+  min-width: 250px;
+  width: 100%;
+
+  div input{
+    height: 20px;
+    padding: 10px 15px;
+  }
+
+  label {
+    top: -9px;
+    font-family: Lato;
+  }
+}
+
+.notEmptyInput {
+  margin-top: 5px !important;
+  min-width: 250px;
+  width: 100%;
+
+  div input{
+    height: 20px;
+    padding: 10px 15px;
+    font-family: Lato;
+  }
+}
