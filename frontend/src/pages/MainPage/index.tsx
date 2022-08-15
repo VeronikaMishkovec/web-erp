@@ -6,6 +6,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTime } from 'luxon'
 
 import { TodayDate } from '../../components/TodayDate'
+import { CurrentWorkField } from '../../components/currentWorkField'
 import { WEEKDAYS } from '../../constants/datetime'
 import { Layout } from '../../layout'
 
@@ -21,19 +22,22 @@ export const MainPage = () => {
   return (
     <Layout>
       <div className={'mainContainer'}>
-        <TodayDate day={today} weekday={weekday} month={month} />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <StaticDatePicker
-            className={'calendar'}
-            displayStaticWrapperAs='desktop'
-            openTo='day'
-            value={value}
-            onChange={(newValue) => {
-              setValue(newValue)
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
+        <div>
+          <TodayDate day={today} weekday={weekday} month={month} />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <StaticDatePicker
+              className={'calendar'}
+              displayStaticWrapperAs='desktop'
+              openTo='day'
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue)
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </div>
+        <CurrentWorkField />
       </div>
     </Layout>
   )

@@ -66,6 +66,16 @@ class UserController {
       next(e);
     }
   }
+
+  async logout(req, res, next) {
+    const { token } = req.body;
+    try {
+      const refreshToken = await userService.logout(token);
+      res.json(refreshToken);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new UserController();

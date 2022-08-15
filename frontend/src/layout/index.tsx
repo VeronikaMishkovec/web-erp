@@ -1,13 +1,17 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
+import { SettingsMenu } from '../components/SettingsMenu'
 import { COLORS } from '../constants/colors'
 import { ROUTES } from '../constants/routes'
-import { checkAuthRequestAction } from '../store/reducer/auth'
+import {
+  checkAuthRequestAction,
+  logoutRequestAction,
+} from '../store/reducer/auth'
 import { userInfoRequestAction } from '../store/reducer/user'
 import { useAppDispatch, useAppSelector } from '../store/reduxHooks'
 import { MainType } from '../store/types'
@@ -19,28 +23,45 @@ interface Props {
 }
 
 export const Layout = ({ children }: Props) => {
+  const [showSettings, setShowSettings] = useState(false)
+
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const userId = useAppSelector((state: MainType) => state.auth.user.id)
-  const userEmail = useAppSelector((state: MainType) => state.user.user.email)
+  const userEmail = useAppSelector((state: MainType) => state.auth.user.email)
   const isCurrentProject = useAppSelector(
     (state: MainType) => state.user.user.is_current_project,
   )
+  const isLogin = useAppSelector((state: MainType) => state.auth.isLogin)
+
+  const token = localStorage.getItem('refreshToken')
 
   useEffect(() => {
-    const token = localStorage.getItem('refreshToken')
     dispatch(checkAuthRequestAction({ token }))
   }, [])
 
   useEffect(() => {
     dispatch(userInfoRequestAction({ userId }))
   }, [userId])
+  // @ts-ignore
+  useEffect(() => {
+    if (!isLogin && !token) {
+      navigate(ROUTES.LOGIN)
+    }
+  }, [isLogin])
+
+  const handleShowSettings = () => setShowSettings(!showSettings)
+
+  const handleLogout = () => {
+    dispatch(logoutRequestAction({ token }))
+  }
 
   return (
     <div>
       <header className={'headerContainer'}>
         <div className={'userContainer'}>
-          <Link to={ROUTES.PROFILE} className={'profileLink'}>
+          <Link to={ROUTES.PROFILE} className={'link'}>
             <AccountCircleIcon sx={{ color: COLORS.TEAL }} />
           </Link>
           <div className={'userEmail'}>{userEmail}</div>
@@ -57,11 +78,12 @@ export const Layout = ({ children }: Props) => {
             </>
           )}
         </div>
-        <div className={'iconsContainer'}>
-          <SettingsIcon sx={{ color: COLORS.TEAL }} />
+        <div className={'iconsContainer'} onClick={handleShowSettings}>
+          <SettingsIcon sx={{ color: COLORS.TEAL }} className={'link'} />
         </div>
       </header>
       {children}
+      {showSettings && <SettingsMenu onLogoutClick={handleLogout} />}
     </div>
   )
 }
