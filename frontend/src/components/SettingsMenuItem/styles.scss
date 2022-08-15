@@ -1,0 +1,22 @@
+@import "../../constants/colors";
+
+.itemContainer {
+  display: flex;
+  align-items: center;
+  margin: 10px 15px;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    color: $teal;
+    border: 1px solid $teal;
+    transition: border 0.5s;
+
+  }
+
+  .title {
+    margin-left: 10px;
+  }
+}

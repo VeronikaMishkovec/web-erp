@@ -1,0 +1,27 @@
+@import "../../../constants/colors";
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modalContainer {
+    background-color: $white;
+    width: 40%;
+    position: absolute;
+    border-radius: 5px;
+    outline: transparent;
+
+    .modelHeader {
+      border-bottom: 1px solid $onahau;
+      padding: 10px 15px;
+      font-family: 'Lato Black', sans-serif !important;
+      font-size: 18px;
+      color: $teal;
+    }
+
+    .modelContent {
+      padding: 10px 15px;
+    }
+  }
+}
