@@ -1,6 +1,7 @@
 import { IUser } from './IUser'
 
 export interface ProjectsType {
+  isCreatedSuccessfully: boolean
   project: {
     closed_date: string
     created_date: string

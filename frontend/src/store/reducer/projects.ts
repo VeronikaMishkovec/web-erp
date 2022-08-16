@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { ProjectsType } from '../../types/ProjectsResponse'
 
 const initialState: ProjectsType = {
+  isCreatedSuccessfully: false,
   project: {
     closed_date: '',
     created_date: '',
@@ -22,6 +23,7 @@ export const projectSlice = createSlice({
     newProjectRequestAction: (state, action) => {},
     newProjectSuccessAction: (state, action: PayloadAction<ProjectsType>) => {
       state.project = action.payload.project
+      state.isCreatedSuccessfully = true
     },
   },
 })
