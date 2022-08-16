@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 
 import { LABEL } from '../../../constants/labels'
 import { newProjectRequestAction } from '../../../store/reducer/projects'
+import { useAppSelector } from '../../../store/reduxHooks'
+import { MainType } from '../../../store/types'
 import { CustomButton } from '../../customComponents/CustomButton'
 import { CustomInput } from '../../customComponents/CustomInput'
 import { CustomModal } from '../../customComponents/CustomModal'
@@ -22,8 +24,9 @@ export const AddNewProjectModal = ({
 
   const dispatch = useDispatch()
 
-  const handleCreateNewProject = () => 1
-  // dispatch(newProjectRequestAction({ projectName, userEmail }))
+  const handleCreateNewProject = () => {
+    dispatch(newProjectRequestAction({ name: projectName, email: userEmail }))
+  }
 
   return (
     <CustomModal

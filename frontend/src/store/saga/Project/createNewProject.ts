@@ -5,11 +5,14 @@ import { NewProjectRequestType } from '../../../api/requests/types'
 import { ProjectsType } from '../../../types/ProjectsResponse'
 import * as action from '../../reducer/projects'
 
-function* createNewProjectSagaWorker({ name, email }: NewProjectRequestType) {
+interface PayloadType {
+  payload: NewProjectRequestType
+}
+
+function* createNewProjectSagaWorker({ payload }: PayloadType) {
   try {
     const res: ProjectsType = yield call(createNewProjectRequest, {
-      name,
-      email,
+      ...payload,
     })
     yield put(action.newProjectSuccessAction(res))
   } catch (error) {
@@ -19,5 +22,5 @@ function* createNewProjectSagaWorker({ name, email }: NewProjectRequestType) {
 
 export default function* createNewProjectSagaWatcher() {
   // @ts-ignore
-  yield takeLatest(action.newProjectRequestAction(), createNewProjectSagaWorker)
+  yield takeLatest(action.newProjectRequestAction, createNewProjectSagaWorker)
 }

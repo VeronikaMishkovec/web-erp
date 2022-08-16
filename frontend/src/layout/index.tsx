@@ -39,6 +39,10 @@ export const Layout = ({ children }: Props) => {
 
   const isLogin = useAppSelector((state: MainType) => state.auth.isLogin)
 
+  const isProjectCreated = useAppSelector(
+    (state: MainType) => state.project.isCreatedSuccessfully,
+  )
+
   const token = localStorage.getItem('refreshToken')
 
   useEffect(() => {
@@ -54,6 +58,10 @@ export const Layout = ({ children }: Props) => {
       navigate(ROUTES.LOGIN)
     }
   }, [isLogin])
+
+  useEffect(() => {
+    isProjectCreated && setShowNewProjectModal(false)
+  }, [isProjectCreated])
 
   const handleShowSettings = () => setShowSettings(!showSettings)
 
