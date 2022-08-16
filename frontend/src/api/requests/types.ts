@@ -10,3 +10,8 @@ export interface CheckAuthRequestType {
 export interface UserInfoRequestType {
   id: string
 }
+
+export interface NewProjectRequestType {
+  email: string
+  name: string
+}

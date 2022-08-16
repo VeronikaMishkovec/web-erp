@@ -1,4 +1,5 @@
 export enum API {
+  CREATE_NEW_PROJECT = '/projects/create-new-project',
   LOGIN = '/auth/login',
   LOGOUT = '/auth/logout',
   REFRESH = '/auth/refresh',

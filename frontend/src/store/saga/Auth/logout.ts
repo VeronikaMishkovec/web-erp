@@ -9,7 +9,6 @@ function* logoutSagaWorker({ token }: CheckAuthRequestType) {
   try {
     const res: AuthResponse = yield call(logoutRequest, { token })
     yield put(action.logoutSuccessAction(res))
-    console.log(res)
     localStorage.removeItem('refreshToken')
   } catch (error) {
     console.log(error)
