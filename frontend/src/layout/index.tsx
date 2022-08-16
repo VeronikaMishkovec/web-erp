@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { AddNewProjectModal } from '../components/Modals/AddNewProjectModal'
@@ -30,11 +31,12 @@ export const Layout = ({ children }: Props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const userId = useAppSelector((state: MainType) => state.auth.user.id)
   const userEmail = useAppSelector((state: MainType) => state.auth.user.email)
+  const userId = useAppSelector((state: MainType) => state.auth.user.id)
   const isCurrentProject = useAppSelector(
-    (state: MainType) => state.user.user.is_current_project,
+    (state: MainType) => state.user.user.project_list,
   )
+
   const isLogin = useAppSelector((state: MainType) => state.auth.isLogin)
 
   const token = localStorage.getItem('refreshToken')
@@ -48,7 +50,7 @@ export const Layout = ({ children }: Props) => {
   }, [userId])
   // @ts-ignore
   useEffect(() => {
-    if (!isLogin && !token) {
+    if (!isLogin || !token) {
       navigate(ROUTES.LOGIN)
     }
   }, [isLogin])
@@ -60,7 +62,7 @@ export const Layout = ({ children }: Props) => {
   }
 
   return (
-    <div>
+    <>
       <header className={'headerContainer'}>
         <div className={'userContainer'}>
           <Link to={ROUTES.PROFILE} className={'link'}>
@@ -98,7 +100,8 @@ export const Layout = ({ children }: Props) => {
         open={showNewProjectModal}
         onCloseModal={() => setShowSettings(false)}
         onClickCancel={() => setShowNewProjectModal(false)}
+        userEmail={userEmail}
       />
-    </div>
+    </>
   )
 }

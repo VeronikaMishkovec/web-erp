@@ -11,7 +11,6 @@ const initialState: AuthResponse = {
     id: '',
     email: '',
     project_list: [],
-    is_current_project: false,
   },
 }
 
