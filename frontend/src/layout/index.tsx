@@ -54,7 +54,7 @@ export const Layout = ({ children }: Props) => {
   }, [userId])
   // @ts-ignore
   useEffect(() => {
-    if (!isLogin || !token) {
+    if (!isLogin && !token) {
       navigate(ROUTES.LOGIN)
     }
   }, [isLogin])

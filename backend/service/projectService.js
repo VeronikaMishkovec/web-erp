@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const bcrypt = require("bcrypt");
 
 const UserDto = require("../dtos/userDto");
-const UserInfoDto = require("../dtos/userInfoDto");
 const ApiError = require("../exeptions/apiError");
 const ProjectModel = require("../models/projectModel");
 const UserModel = require("../models/userModel");
-const tokenService = require("../service/tokenService");
 
 class ProjectService {
   async createProject(name, email) {
@@ -18,7 +15,7 @@ class ProjectService {
     }
 
     const date = new Date();
-    const projectTeamMember = new UserInfoDto(user);
+    const projectTeamMember = new UserDto(user);
 
     const newProject = await ProjectModel.create({
       is_current: true,
@@ -27,6 +24,10 @@ class ProjectService {
       created_date: date,
       closed_date: null,
       users: [projectTeamMember],
+    });
+
+    await UserModel.findByIdAndUpdate(user._id, {
+      projects_list: [...user.projects_list, newProject],
     });
 
     return newProject;
