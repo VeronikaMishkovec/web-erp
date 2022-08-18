@@ -1,7 +1,7 @@
-import api, { METHOD_POST } from '..'
+import api, { METHOD_GET, METHOD_POST } from '..'
 import { API } from '../../constants/api'
 
-import { NewProjectRequestType } from './types'
+import { AllProjectsRequestType, NewProjectRequestType } from './types'
 
 export const createNewProjectRequest = ({
   name,
@@ -13,4 +13,8 @@ export const createNewProjectRequest = ({
     { name, email },
     'create new project',
   )
+}
+
+export const getAllProjectsRequest = ({ user_id }: AllProjectsRequestType) => {
+  return api(API.ALL_PROJECTS, METHOD_GET, { user_id }, 'projects list')
 }

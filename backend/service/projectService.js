@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const UserDto = require("../dtos/userDto");
+const ProjectsDto = require("../dtos/projectDto");
 const ApiError = require("../exeptions/apiError");
 const ProjectModel = require("../models/projectModel");
-const TaskModel = require("../models/taskModel");
 const UserModel = require("../models/userModel");
 
 class ProjectService {
@@ -24,6 +23,14 @@ class ProjectService {
       user_id: user._id,
     });
     return newProject;
+  }
+
+  async allProjects(userId) {
+    const project = await ProjectModel.find({ user_id: userId });
+
+    const projectsList = project.map((p) => new ProjectsDto(p));
+
+    return projectsList;
   }
 }
 module.exports = new ProjectService();
