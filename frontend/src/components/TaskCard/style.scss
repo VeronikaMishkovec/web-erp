@@ -1,0 +1,15 @@
+@import "../../constants/colors";
+
+.cardContainer {
+  border-width: 2px;
+  border-style: solid;
+  padding: 10px 15px;
+  border-radius: 15px;
+  min-width: 200px;
+  width: 30%;
+}
+
+.defaultTask {
+  border-color: $dolly;
+  background-color: rgba(243,235,107, 0.5);
+}

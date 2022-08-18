@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const UserDto = require("../dtos/userDto");
 const UserInfoDto = require("../dtos/userInfoDto");
 const ApiError = require("../exeptions/apiError");
+const ProjectModel = require("../models/projectModel");
+const TaskModel = require("../models/taskModel");
 const UserModel = require("../models/userModel");
 const tokenService = require("../service/tokenService");
 
@@ -15,11 +17,25 @@ class UserService {
       throw ApiError.BadRequest(`Email ${email} has already been registrated`);
     }
     const hashPassword = await bcrypt.hash(password, 3);
+
     const user = await UserModel.create({
       email,
       password: hashPassword,
-      is_current_project: false,
-      project_list: [],
+    });
+
+    const defaultProject = await ProjectModel.create({
+      status: "Default",
+      name: "Waiting for a project",
+      created_date: new Date(),
+      closed_date: null,
+      user_id: user._id,
+    });
+
+    await TaskModel.create({
+      name: "Waiting for a project",
+      title: "Working on personal project",
+      timing: [],
+      project_id: defaultProject._id,
     });
 
     const userDto = new UserDto(user);

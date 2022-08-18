@@ -3,6 +3,7 @@
 const UserDto = require("../dtos/userDto");
 const ApiError = require("../exeptions/apiError");
 const ProjectModel = require("../models/projectModel");
+const TaskModel = require("../models/taskModel");
 const UserModel = require("../models/userModel");
 
 class ProjectService {
@@ -15,21 +16,13 @@ class ProjectService {
     }
 
     const date = new Date();
-    const projectTeamMember = new UserDto(user);
-
     const newProject = await ProjectModel.create({
-      is_current: true,
-      is_closed: false,
+      status: "Active",
       name,
       created_date: date,
       closed_date: null,
-      users: [projectTeamMember],
+      user_id: user._id,
     });
-
-    await UserModel.findByIdAndUpdate(user._id, {
-      projects_list: [...user.projects_list, newProject],
-    });
-
     return newProject;
   }
 }
