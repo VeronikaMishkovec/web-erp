@@ -4,6 +4,10 @@
   padding: 10px 30px;
   display: flex;
 
+  .mainContent {
+    width: 100%;
+  }
+
   .Mui-selected {
     background-color: $teal !important;
   }

@@ -2,12 +2,11 @@
 const { Schema, model } = require("mongoose");
 
 const ProjectSchema = new Schema({
-  is_current: { type: Boolean },
-  is_closed: { type: Boolean },
+  status: { type: String },
   name: { type: String },
   created_date: { type: Date },
   closed_date: { type: Date },
-  users: { type: Array },
+  user_id: { type: String },
 });
 
 module.exports = model("Project", ProjectSchema);
