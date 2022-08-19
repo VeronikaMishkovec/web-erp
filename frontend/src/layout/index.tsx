@@ -16,6 +16,7 @@ import {
 } from '../store/reducer/auth'
 import { userInfoRequestAction } from '../store/reducer/user'
 import { useAppDispatch, useAppSelector } from '../store/reduxHooks'
+import { userIdSelector } from '../store/selectors/userSelector'
 import { MainType } from '../store/types'
 
 import './styles.scss'
@@ -32,7 +33,7 @@ export const Layout = ({ children }: Props) => {
   const navigate = useNavigate()
 
   const userEmail = useAppSelector((state: MainType) => state.auth.user.email)
-  const userId = useAppSelector((state: MainType) => state.auth.user.id)
+  const userId = useAppSelector(userIdSelector)
   const isCurrentProject = useAppSelector(
     (state: MainType) => state.user.user.project_list,
   )

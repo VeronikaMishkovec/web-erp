@@ -8,11 +8,11 @@ const initialState: ProjectsType = {
   project: {
     closed_date: '',
     created_date: '',
-    is_closed: false,
-    is_current: false,
     name: '',
-    users: [],
+    status: '',
+    used_id: '',
   },
+  projects_list: [],
 }
 
 export const projectSlice = createSlice({
@@ -25,10 +25,20 @@ export const projectSlice = createSlice({
       state.project = action.payload.project
       state.isCreatedSuccessfully = true
     },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    allProjectsRequestAction: (state, action) => {},
+    allProjectsSuccessAction: (state, action: PayloadAction<ProjectsType>) => {
+      // @ts-ignore
+      state.projects_list = action.payload
+    },
   },
 })
 
-export const { newProjectRequestAction, newProjectSuccessAction } =
-  projectSlice.actions
+export const {
+  newProjectRequestAction,
+  newProjectSuccessAction,
+  allProjectsRequestAction,
+  allProjectsSuccessAction,
+} = projectSlice.actions
 
 export default projectSlice.reducer
