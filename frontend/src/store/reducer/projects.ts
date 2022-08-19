@@ -12,6 +12,7 @@ const initialState: ProjectsType = {
     status: '',
     used_id: '',
   },
+  projects_list: [],
 }
 
 export const projectSlice = createSlice({
@@ -27,12 +28,17 @@ export const projectSlice = createSlice({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     allProjectsRequestAction: (state, action) => {},
     allProjectsSuccessAction: (state, action: PayloadAction<ProjectsType>) => {
-      state.project = action.payload.project
+      // @ts-ignore
+      state.projects_list = action.payload
     },
   },
 })
 
-export const { newProjectRequestAction, newProjectSuccessAction } =
-  projectSlice.actions
+export const {
+  newProjectRequestAction,
+  newProjectSuccessAction,
+  allProjectsRequestAction,
+  allProjectsSuccessAction,
+} = projectSlice.actions
 
 export default projectSlice.reducer

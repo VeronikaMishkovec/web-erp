@@ -13,6 +13,17 @@
   }
 }
 .MuiPickerStaticWrapper-root {
-   max-width: 320px;
+    max-width: 330px;
  }
 
+.leftSideBar {
+  width: 25%;
+}
+
+.subHeader {
+  color: $teal;
+  font-family: 'Lato Black' !important;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

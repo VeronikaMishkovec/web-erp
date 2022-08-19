@@ -16,5 +16,5 @@ export const createNewProjectRequest = ({
 }
 
 export const getAllProjectsRequest = ({ user_id }: AllProjectsRequestType) => {
-  return api(API.ALL_PROJECTS, METHOD_GET, { user_id }, 'projects list')
+  return api(API.ALL_PROJECTS, METHOD_POST, { user_id }, 'projects list')
 }
