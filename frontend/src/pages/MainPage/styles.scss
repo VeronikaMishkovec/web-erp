@@ -27,3 +27,10 @@
   margin-left: 10px;
   margin-bottom: 10px;
 }
+
+.taskContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 1;
+}

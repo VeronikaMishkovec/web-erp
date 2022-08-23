@@ -16,7 +16,7 @@ import { useAppSelector } from '../store/reduxHooks'
 import { MainType } from '../store/types'
 
 export const ErpRoutes = () => {
-  const isLogin = useAppSelector((state: MainType) => state.auth.isLogin)
+  const isLogin = useAppSelector((state: MainType) => state.auth)
 
   return (
     <Router>

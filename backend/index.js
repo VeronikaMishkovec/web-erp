@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const authRouter = require("./routes/AuthRouter");
 const projectsRouter = require("./routes/ProjectsRouter");
+const taskRouter = require("./routes/TasksRouter");
 const userRouter = require("./routes/UserRouter");
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/projects", projectsRouter);
+app.use("/tasks", taskRouter);
 
 app.use(errorMiddleware);
 

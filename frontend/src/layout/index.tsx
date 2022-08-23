@@ -1,9 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { AddNewProjectModal } from '../components/Modals/AddNewProjectModal'
@@ -51,7 +49,7 @@ export const Layout = ({ children }: Props) => {
   }, [])
 
   useEffect(() => {
-    dispatch(userInfoRequestAction({ userId }))
+    userId && dispatch(userInfoRequestAction({ userId }))
   }, [userId])
   // @ts-ignore
   useEffect(() => {
@@ -78,18 +76,6 @@ export const Layout = ({ children }: Props) => {
             <AccountCircleIcon sx={{ color: COLORS.TEAL }} />
           </Link>
           <div className={'userEmail'}>{userEmail}</div>
-        </div>
-        <div className={'currentProjectContainer'}>
-          {isCurrentProject ? (
-            ''
-          ) : (
-            <>
-              <AccessTimeIcon sx={{ color: COLORS.TEAL }} />
-              <div className={'currentProject'}>
-                {'Waiting for a project...'}
-              </div>
-            </>
-          )}
         </div>
         <div className={'iconsContainer'} onClick={handleShowSettings}>
           <SettingsIcon sx={{ color: COLORS.TEAL }} className={'link'} />

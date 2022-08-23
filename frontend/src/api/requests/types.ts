@@ -19,3 +19,7 @@ export interface NewProjectRequestType {
 export interface AllProjectsRequestType {
   user_id: string
 }
+
+export interface AllTasksRequestType {
+  project_id: string[]
+}

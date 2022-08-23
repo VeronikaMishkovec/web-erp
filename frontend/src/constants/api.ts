@@ -1,5 +1,6 @@
 export enum API {
   ALL_PROJECTS = '/projects/all-projects',
+  ALL_TASKS = '/tasks/all-tasks',
   CREATE_NEW_PROJECT = '/projects/create-new-project',
   LOGIN = '/auth/login',
   LOGOUT = '/auth/logout',

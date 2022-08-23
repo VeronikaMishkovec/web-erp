@@ -11,6 +11,7 @@ const initialState: ProjectsType = {
     name: '',
     status: '',
     used_id: '',
+    id: '',
   },
   projects_list: [],
 }
