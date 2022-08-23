@@ -3,13 +3,25 @@
 .cardContainer {
   border-width: 2px;
   border-style: solid;
-  padding: 10px 15px;
   border-radius: 15px;
-  min-width: 200px;
-  width: 30%;
+  width: 24%;
+  height: 100%;
 }
 
 .defaultTask {
   border-color: $dolly;
-  background-color: rgba(243,235,107, 0.5);
+  background-color: rgba(243, 235, 107, 0.3);
+}
+
+.cardHeader {
+  padding: 10px 15px;
+  border-radius: 15px 15px 0 0 ;
+  background-color: rgba(243, 235, 107, 0.4);
+  font-family: 'Lato Black', sans-serif !important;
+  color: $elpaso;
+}
+
+.cardContent {
+  padding: 10px 15px;
+  color: $elpaso;
 }

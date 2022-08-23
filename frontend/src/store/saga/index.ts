@@ -6,6 +6,7 @@ import logoutSagaWatcher from './Auth/logout'
 import registrationSagaWatcher from './Auth/registration'
 import allProjectsSagaWatcher from './Project/allProjects'
 import createNewProjectSagaWatcher from './Project/createNewProject'
+import allTasksSagaWatcher from './Task/allTasksList'
 import userInfoSagaWatcher from './User/userInfo'
 
 export default function* rootSaga() {
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     registrationSagaWatcher(),
     allProjectsSagaWatcher(),
     createNewProjectSagaWatcher(),
+    allTasksSagaWatcher(),
     userInfoSagaWatcher(),
   ])
 }

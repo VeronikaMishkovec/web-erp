@@ -49,7 +49,7 @@ export const Layout = ({ children }: Props) => {
   }, [])
 
   useEffect(() => {
-    dispatch(userInfoRequestAction({ userId }))
+    userId && dispatch(userInfoRequestAction({ userId }))
   }, [userId])
   // @ts-ignore
   useEffect(() => {
