@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { TextField } from '@mui/material'
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch } from 'react-redux'
 
 import { ProjectItem } from '../../components/ProjectItem'
@@ -39,11 +41,11 @@ export const MainPage = () => {
     )
   })
 
-  const renderTasksList = tasksList?.map((task) => {
+  const renderTasksList = tasksList?.map((task, id) => {
     return (
       <TaskCard
+        key={id}
         taskColor={'defaultTask'}
-        key={task._id}
         title={task.title}
         name={task.name}
       />
@@ -88,8 +90,10 @@ export const MainPage = () => {
           {renderProjectList}
         </div>
         <div className={'mainContent'}>
-          <CurrentWorkField />
-          <div className={'taskContainer'}>{renderTasksList}</div>
+          <DndProvider backend={HTML5Backend}>
+            <CurrentWorkField />
+            <div className={'taskContainer'}>{renderTasksList}</div>
+          </DndProvider>
         </div>
       </div>
     </Layout>
