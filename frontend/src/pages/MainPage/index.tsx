@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 
 import { ProjectItem } from '../../components/ProjectItem'
 import { TaskCard } from '../../components/TaskCard'
+import { TaskCardTypes } from '../../components/TaskCard/types'
 import { CurrentWorkField } from '../../components/currentWorkField'
 import { HEADERS } from '../../constants/headers'
 import { Layout } from '../../layout'
@@ -28,6 +29,7 @@ export const MainPage = () => {
   const [projectsList, setProjectsList] = useState<Project[]>()
   const [projectsIdsList, setProjectsIdsList] = useState<string[]>()
   const [tasksList, setTasksList] = useState<TaskType[]>()
+  const [task, setTask] = useState<TaskCardTypes>()
 
   const dispatch = useDispatch()
 
@@ -41,6 +43,14 @@ export const MainPage = () => {
     )
   })
 
+  const handleSetTask = (e: TaskCardTypes) => {
+    setTask(e)
+
+    const newTasksList = tasksList?.filter((item) => item._id !== e.id)
+    setTasksList(newTasksList)
+    console.log(newTasksList)
+  }
+
   const renderTasksList = tasksList?.map((task, id) => {
     return (
       <TaskCard
@@ -48,6 +58,8 @@ export const MainPage = () => {
         taskColor={'defaultTask'}
         title={task.title}
         name={task.name}
+        id={task._id}
+        onDragEnd={handleSetTask}
       />
     )
   })
@@ -71,7 +83,6 @@ export const MainPage = () => {
   useEffect(() => {
     tasks_list && setTasksList(tasks_list)
   }, [tasks_list])
-
   return (
     <Layout>
       <div className={'mainContainer'}>
@@ -91,7 +102,7 @@ export const MainPage = () => {
         </div>
         <div className={'mainContent'}>
           <DndProvider backend={HTML5Backend}>
-            <CurrentWorkField />
+            <CurrentWorkField currentTask={task} />
             <div className={'taskContainer'}>{renderTasksList}</div>
           </DndProvider>
         </div>
