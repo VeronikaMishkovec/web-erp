@@ -8,7 +8,10 @@ import { CurrentWorkFieldType } from './types'
 
 import './styles.scss'
 
-export const CurrentWorkField = ({ currentTask }: CurrentWorkFieldType) => {
+export const CurrentWorkField = ({
+  currentTask,
+  onCloseTask,
+}: CurrentWorkFieldType) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'task',
     drop: () => ({ name: 'Dustbin' }),
@@ -26,6 +29,8 @@ export const CurrentWorkField = ({ currentTask }: CurrentWorkFieldType) => {
           taskColor={'defaultTask'}
           title={currentTask.title}
           onDragEnd={() => 1}
+          onCloseTask={onCloseTask}
+          isCurrentTask={!!currentTask}
         />
       ) : (
         <div className={'currentWork'}>{'There is no current work'}</div>
