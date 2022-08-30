@@ -7,6 +7,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch } from 'react-redux'
 
+import { Clock } from '../../components/Clock'
 import { ProjectItem } from '../../components/ProjectItem'
 import { TaskCard } from '../../components/TaskCard'
 import { TaskCardTypes } from '../../components/TaskCard/types'
@@ -92,6 +93,7 @@ export const MainPage = () => {
     <Layout>
       <div className={'mainContainer'}>
         <div className={'leftSideBar'}>
+          <Clock />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <StaticDatePicker
               className={'calendar'}
