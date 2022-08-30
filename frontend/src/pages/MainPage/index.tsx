@@ -7,6 +7,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch } from 'react-redux'
 
+import { Clock } from '../../components/Clock'
 import { ProjectItem } from '../../components/ProjectItem'
 import { TaskCard } from '../../components/TaskCard'
 import { TaskCardTypes } from '../../components/TaskCard/types'
@@ -29,7 +30,7 @@ export const MainPage = () => {
   const [projectsList, setProjectsList] = useState<Project[]>()
   const [projectsIdsList, setProjectsIdsList] = useState<string[]>()
   const [tasksList, setTasksList] = useState<TaskType[]>()
-  const [task, setTask] = useState<TaskCardTypes>()
+  const [task, setTask] = useState<TaskCardTypes | null>(null)
 
   const dispatch = useDispatch()
 
@@ -45,10 +46,14 @@ export const MainPage = () => {
 
   const handleSetTask = (e: TaskCardTypes) => {
     setTask(e)
-
     const newTasksList = tasksList?.filter((item) => item._id !== e.id)
     setTasksList(newTasksList)
-    console.log(newTasksList)
+  }
+
+  const handleRemoveFromCurrentWork = (e: TaskCardTypes) => {
+    setTask(null)
+    // @ts-ignore
+    setTasksList([task, ...tasksList])
   }
 
   const renderTasksList = tasksList?.map((task, id) => {
@@ -60,6 +65,7 @@ export const MainPage = () => {
         name={task.name}
         id={task._id}
         onDragEnd={handleSetTask}
+        isCurrentTask={false}
       />
     )
   })
@@ -87,6 +93,7 @@ export const MainPage = () => {
     <Layout>
       <div className={'mainContainer'}>
         <div className={'leftSideBar'}>
+          <Clock />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <StaticDatePicker
               className={'calendar'}
@@ -102,7 +109,10 @@ export const MainPage = () => {
         </div>
         <div className={'mainContent'}>
           <DndProvider backend={HTML5Backend}>
-            <CurrentWorkField currentTask={task} />
+            <CurrentWorkField
+              currentTask={task}
+              onCloseTask={handleRemoveFromCurrentWork}
+            />
             <div className={'taskContainer'}>{renderTasksList}</div>
           </DndProvider>
         </div>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
+import CloseIcon from '@mui/icons-material/Close'
 import { useDrag } from 'react-dnd'
 
 import { TaskCardTypes } from './types'
@@ -12,6 +13,8 @@ export const TaskCard = ({
   name,
   id,
   onDragEnd,
+  onCloseTask,
+  isCurrentTask,
 }: TaskCardTypes) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'task',
@@ -28,7 +31,12 @@ export const TaskCard = ({
 
   return (
     <div className={`cardContainer ${taskColor}`} ref={drag} key={id}>
-      <div className={'cardHeader'}>{name}</div>
+      <div className={'cardHeader'}>
+        <div>{name}</div>
+        {isCurrentTask && (
+          <CloseIcon onClick={onCloseTask} style={{ cursor: 'pointer' }} />
+        )}
+      </div>
       <div className={'cardContent'}>{title}</div>
     </div>
   )
