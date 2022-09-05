@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { TextField } from '@mui/material'
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { DateTime } from 'luxon'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch } from 'react-redux'
@@ -54,6 +55,7 @@ export const MainPage = () => {
     setTask(null)
     // @ts-ignore
     setTasksList([task, ...tasksList])
+    const endDate = DateTime.utc().toISO()
   }
 
   const renderTasksList = tasksList?.map((task, id) => {
@@ -89,6 +91,7 @@ export const MainPage = () => {
   useEffect(() => {
     tasks_list && setTasksList(tasks_list)
   }, [tasks_list])
+
   return (
     <Layout>
       <div className={'mainContainer'}>

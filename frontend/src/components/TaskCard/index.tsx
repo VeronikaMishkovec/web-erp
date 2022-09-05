@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
 import { useDrag } from 'react-dnd'
+import { useStopwatch } from 'react-timer-hook'
 
 import { TaskCardTypes } from './types'
 
@@ -16,6 +17,15 @@ export const TaskCard = ({
   onCloseTask,
   isCurrentTask,
 }: TaskCardTypes) => {
+  const { hours, minutes, pause, reset, seconds, start } = useStopwatch({
+    autoStart: false,
+  })
+  const [secondsString, setSecondsString] = useState('00')
+  const [minutesString, setMinutesString] = useState('00')
+  const [hoursString, setHoursString] = useState('00')
+
+  const TIMER = `${hoursString}:${minutesString}:${secondsString}`
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'task',
     item: { name, title, id },
@@ -29,6 +39,43 @@ export const TaskCard = ({
     }),
   }))
 
+  useEffect(() => {
+    if (isCurrentTask) {
+      console.log(id, title)
+      start()
+    } else {
+      pause()
+    }
+  }, [isCurrentTask])
+
+  useEffect(() => {
+    if (seconds == 0 || seconds < 10) {
+      setSecondsString(`0${seconds}`)
+    } else {
+      setSecondsString(`${seconds}`)
+    }
+  }, [seconds])
+
+  useEffect(() => {
+    if (minutes == 0 || minutes < 10) {
+      setMinutesString(`0${minutes}`)
+    } else {
+      setMinutesString(`${minutes}`)
+    }
+  }, [minutes])
+
+  useEffect(() => {
+    if (hours == 0 || hours < 10) {
+      setHoursString(`0${hours}`)
+    } else {
+      setHoursString(`${hours}`)
+    }
+  }, [hours])
+
+  // useEffect(() => {
+  //   isCurrentTask ? start() : pause()
+  // }, [isCurrentTask])
+
   return (
     <div className={`cardContainer ${taskColor}`} ref={drag} key={id}>
       <div className={'cardHeader'}>
@@ -38,6 +85,7 @@ export const TaskCard = ({
         )}
       </div>
       <div className={'cardContent'}>{title}</div>
+      <div>{TIMER}</div>
     </div>
   )
 }
